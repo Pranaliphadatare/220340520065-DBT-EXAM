@@ -1,0 +1,199 @@
+Q1.
+
+use juhu;
+
+create table DEPT1(DEPTNO int, DNAME VARCHAR(15),LOC VARCHAR (10));
+
+INSERT into DEPT1 values(10,'ACCOUNTING','NEW YORK'),
+						(20,'RESEARCH','DALLAS'),
+                        (30,'SALES','CHICAGO'),
+                        (40,'OPERATION','BOSTON');
+                        
+DROP TABLE DEPT1;      
+
+SELECT * FROM DEPT1;      
+
+
+CREATE TABLE EMP3(EMPNO INT ,ENAME VARCHAR(10),JOB VARCHAR(9),HIREDATE DATE , SAL FLOAT(7,2) , COMM FLOAT (7,2), DEPTNO INT );        
+
+INSERT INTO EMP3 VALUES(7839, 'KING', 'MANAGER', '1991-11-17', 5000 ,NULL, 10),
+						(7698, 'BLAKE', 'CLERK', '1981-05-01', 2850, NULL, 30),
+                        (7782, 'CLARK', 'MANAGER', '1981-06-09', 2450 ,NULL ,10),
+                        (7566, 'JONES', 'CLERK' ,'1981-04-02',2975, NULL ,20),
+                        (7654, 'MARTIN', 'SALESMAN', '1981-09-28', 1250 ,1400 ,30),
+                        (7499, 'ALLEN', 'SALESMAN', '1981-02-20', 1600, 300, 30);
+                        
+DROP TABLE EMP3;
+
+SELECT * FROM EMP3;           
+
+
+-- 3. Display all the employees where SAL between 2500 and 5000 (inclusive of both).
+-- ANS:
+
+SELECT ENAME ,SAL FROM EMP3 WHERE SAL >=2500 AND SAL<=5000;
+
+
+ANS. IN TABLE
+
+
+# ENAME	SAL
+KING	  5000.00
+BLAKE	  2850.00
+JONES	  2975.00
+
+
+
+
+
+
+
+
+-- 4. Display all the ENAMEs in descending order of ENAME
+-- ANS:
+
+SELECT ENAME FROM EMP3 ORDER BY ENAME DESC;
+
+ANS. IN TABLE
+
+# ENAME
+ALLEN
+BLAKE
+CLARK
+JONES
+KING
+MARTIN
+
+
+
+
+-- 5. Display all the JOBs in lowercase
+-- ANS:
+
+SELECT LOWER(JOB) AS 'JOB IN LOWERCASE' FROM EMP3;
+
+ANS. IN TABLE
+
+# JOB IN LOWERCASE
+manager
+clerk
+manager
+clerk
+salesman
+salesman
+
+
+
+
+
+
+-- 6. Display the ENAMEs and the lengths of the ENAMEs.
+-- ANS:
+
+SELECT ENAME ,LENGTH(ENAME) FROM EMP3;
+
+
+ANS IN TABLE:
+
+
+# ENAME	LENGTH(ENAME)
+KING	      4
+BLAKE  	5
+CLARK		5
+JONES		5
+MARTIN	6
+ALLEN		5
+
+
+
+
+
+
+
+
+
+-- 7. Display the DEPTNO and the count of employees who belong to that DEPTNO .
+-- ANS:
+
+SELECT DEPTNO , COUNT(EMPNO) FROM EMP3 GROUP BY DEPTNO;
+
+
+ANS IN TABLE:
+
+# DEPTNO	COUNT(EMPNO)
+10		2
+30		3
+20		1
+
+
+
+
+
+-- 8. Display the DNAMEs and the ENAMEs who belong to that DNAME.
+-- ANS:
+
+SELECT DNAME, ENAME FROM EMP3, DEPT1 WHERE DEPT1.DEPTNO = EMP3.DEPTNO;
+
+
+ANS IN TABLE:
+
+# DNAME	ENAME
+ACCOUNTING	KING
+SALES		BLAKE
+ACCOUNTING	CLARK
+RESEARCH	JONES
+SALES		MARTIN
+SALES		ALLEN
+
+
+
+
+-- 9.Display the position at which the string ‘AR’ occurs in the ename.
+-- ANS:
+
+SELECT 
+    INSTR(ENAME, 'AR')
+FROM
+    EMP3;
+
+ANS IN TABLE:
+
+
+# INSTR(ENAME, 'AR')
+0
+0
+3
+0
+2
+0
+
+
+
+
+
+
+
+
+
+-- 10. Display the HRA for each employee given that HRA is 20% of SAL.
+
+-- ANS:
+
+SELECT SAL*0.2 AS HRA FROM EMP3;
+
+ANS IN TABLE:
+
+
+# HRA
+1000.00
+570.00
+490.00
+595.00
+250.00
+320.00
+
+
+
+
+
+             

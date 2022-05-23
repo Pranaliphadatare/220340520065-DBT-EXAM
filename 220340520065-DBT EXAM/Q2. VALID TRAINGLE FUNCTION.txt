@@ -1,0 +1,58 @@
+/*Q2. Create a stored function by the name of FUNC1 to take three parameters, the 
+sides of a triangle. The function should return a Boolean value:- TRUE if the 
+triangle is valid, FALSE otherwise. A triangle is valid if the length of each side is 
+less than the sum of the lengths of the other two sides. Check if the dimensions 
+entered can form a valid triangle. Calling program for the stored function need not 
+be written*/
+
+USE JUHU;
+
+CREATE TABLE TRIANGLE(SIDE CHAR(20));
+DROP TABLE TRIANGLE;
+
+DELIMITER //
+
+CREATE PROCEDURE TRIANGLE1(a int, b int , c int)
+
+begin
+
+declare f char(20);
+
+set f = FUNC1(a,b,c);
+
+insert into TRIANGLE values(f);
+
+end ; //
+delimiter ;
+
+delimiter //
+
+create function FUNC1( x int , y int, z int)
+returns char(20)
+deterministic
+
+begin
+
+     if((x+y)>z  and (y+z)>x and (x+z)>y)
+     
+     then 
+     
+     return 'valid traingle';
+     else
+     return 'invalid trianle';
+     
+	end if;
+    end ; //
+    delimiter ;
+    
+    call TRIANGLE1(4,5,7);
+    call TRIANGLE1(1,2,4);
+    call TRIANGLE1(3,4,5);
+    
+    SELECT 
+    *
+FROM
+    TRIANGLE;
+    
+    drop FUNCTION FUNC1;
+    DROP PROCEDURE TRIANGLE1;

@@ -1,0 +1,39 @@
+/* Q1 Write a stored procedure by the name of PROC1 that accepts two varchar strings
+as parameters. Your procedure should then determine if the first varchar string 
+exists inside the varchar string. For example, if string1 = ‘DAC’ and string2 = 
+‘CDAC, then string1 exists inside string2. The stored procedure should insert the 
+appropriate message into a suitable TEMPP output table. Calling program for the 
+stored procedure need not be written.*/ 
+
+USE JUHU;
+
+CREATE TABLE TEMPP(RESULT VARCHAR(30));
+DROP TABLE TEMPP;
+
+DELIMITER //
+CREATE PROCEDURE PROC1(STR VARCHAR(5),STR1 VARCHAR(5))
+
+BEGIN
+
+DECLARE INSTRING int;
+
+set INSTRING = instr(str,str1);
+
+if(INSTRING>0)
+ then 
+ insert into TEMPP values('str exists in str1');
+ 
+ else 
+	insert into TEMPP values('str does not exist in str1');
+    
+    end if ;
+    end ; //
+    delimiter ;
+    
+    call PROC1('CDAC','DAC');
+    CALL PROC1('HOLD','OLD');
+    DROP PROCEDURE PROC1;
+    SELECT * FROM TEMPP;
+
+
+
